@@ -1,14 +1,14 @@
 <template>
   <div>
     <HeaderComp />
-    <MainComp />
+    <MainComp :SpotifyAlbum="discArr"/>
   </div>
 </template>
 
 <script>
-// import axios from 'axios';
-import MainComp from './components/MainComp'
-import HeaderComp from './components/HeaderComp'
+import axios from 'axios';
+import MainComp from './components/MainComp.vue'
+import HeaderComp from './components/HeaderComp.vue'
 
 export default {
   name: 'App',
@@ -16,14 +16,24 @@ export default {
     MainComp, 
     HeaderComp 
   },
-/*   mounted(){
-    this.getApi()
+  data(){
+    return{
+      apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
+      discArr: []
+    }
+  },
+  mounted(){
+    this.getAPI()
   },
   methods: {
-    getApi(){
-      axios.get('https://flynn.boolean.careers/exercises/api/array/music')
+    getAPI(){
+      axios.get(this.apiUrl)
+        .then((res)=> {
+          this.discArr = res.data.response;
+          console.log(res.data.response);
+      })
     }
-  } */
+  }
 }
 </script>
 

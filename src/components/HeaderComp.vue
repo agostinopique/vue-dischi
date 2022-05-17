@@ -1,19 +1,23 @@
 <template>
-    <div class="header d-flex">
-        <div class="spotify-logo">
-            <a href="#">
-                <img src="../assets/img/logo-small copia.svg" alt="spotify-logo">
-            </a>
-        </div>
-        <div class="genre-select">
-            <select name="genre" id="genre">
-                <option selected>Choose a Genre</option>
-                <option value="rock">Rock</option>
-                <option value="pop">Pop</option>
-                <option value="jazz">Jazz</option>
-                <option value="metal">Metal</option>
-            </select>
+    <div class="header">
+        <div class="header-container">
 
+            <div class="spotify-logo">
+                <a href="#">
+                    <img src="../assets/img/logo-small copia.svg" alt="spotify-logo">
+                </a>
+            </div>
+
+            <div class="genre-select">
+                <select name="genre" id="genre">
+                    <option selected>Choose a Genre</option>
+                    <option value="rock">Rock</option>
+                    <option value="pop">Pop</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="metal">Metal</option>
+                </select>
+    
+            </div>
         </div>
     </div>
 </template>
@@ -26,12 +30,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/style/vars';
+
 .header {
     height: 100px;
     padding: 0 25px;
-    background-color: #2E3A46;
-    justify-content: space-between;
-    align-items: center;
+    background-color: $secondary-color;
+    .header-container{
+        display: flex;
+        height: 100%;
+        width: 75%;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: center;
+    }
     .spotify-logo{
         width: 80px;
         img{

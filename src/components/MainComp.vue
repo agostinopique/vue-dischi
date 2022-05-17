@@ -1,24 +1,42 @@
 <template>
-    <div>
-        <CardComp />
-    </div>
+    <main>
+        <div class="disc-container">
+            <CardComp
+                v-for="(album, index) in SpotifyAlbum"
+                :key="`album-${index}`"
+                :AlbumCard="album"
+            />
+        </div>
+    </main>
 </template>
 
 <script>
-import CardComp from './CardComp.vue'
+import CardComp from './CardComp.vue';
 
 
 export default {
     name: "MainComp",
-    component: {
+    components: {
         CardComp
+    },
+    props: {
+        SpotifyAlbum: Array
     }
 }
 </script>
 
 <style lang="scss" scoped>
-div{
+@import '../assets/style/vars';
+
+main{
     min-height: 100vh;
-    background-color: #1E2D3B;
+    padding-top: 50px;
+    background-color: $primary-color;
+    .disc-container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 75%;
+        margin: 0 auto;
+    }
 }
 </style>
