@@ -1,12 +1,12 @@
 <template>
     <div>
         <HeaderComp 
-            @genreChange="searchGenre" 
+            @getGenre="receiveGenre"
         />
         <main>
             <div v-if="this.isLoaded" class="disc-container">
                 <CardComp
-                    v-for="(album, index) in searchGenre"
+                    v-for="(album, index) in albumFilter"
                     :key="`album-${index}`"
                     :AlbumCard="album"
                 />
@@ -39,7 +39,7 @@ export default {
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
             discArr: [],
             isLoaded: false,
-            searchParam: ''
+            genreParam: ''
         }
     },
 
@@ -51,24 +51,38 @@ export default {
         getAPI(){
         axios.get(this.apiUrl)
             .then((res)=> {
-            this.discArr = res.data.response;
-            this.isLoaded = true;
+                this.discArr = res.data.response;
+                this.isLoaded = true;
             })
         },
-       /*  searchGenre(string){
-            this.searchParam = string;
-            
-        } */
+        receiveGenre(genere){
+            this.genreParam = genere;
+            console.log('GENRE', genere);
+        }
     },
 
-/*
-    computed: {
-        searchGenre(){
-           
 
-           return this.discArr;
+    computed: {
+        albumFilter(){
+            let filteredAlbums = [];
+
+            this.discArr.forEach((album) => {
+
+                if(album.genre.toUpperCase().includes(this.genreParam.toUpperCase())){
+                    
+                    filteredAlbums.push(album);
+
+                } else if (this.genreParam === 'default'){
+
+                    filteredAlbums = this.discArr;
+
+                }
+            })
+            
+            return filteredAlbums;
+
         }
-    }*/
+    }
 
 }
 </script>
