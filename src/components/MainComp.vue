@@ -1,26 +1,37 @@
 <template>
-    <main>
-        <div class="disc-container">
-            <CardComp
-                v-for="(album, index) in SpotifyAlbum"
-                :key="`album-${index}`"
-                :AlbumCard="album"
-            />
-        </div>
-    </main>
+    <div>
+        <HeaderComp />
+        <main>
+            <div v-if="isLoaded" class="disc-container">
+                <CardComp
+                    v-for="(album, index) in SpotifyAlbum"
+                    :key="`album-${index}`"
+                    :AlbumCard="album"
+                />
+            </div>
+            <div v-else>
+                <LoaderComp />
+            </div>
+        </main>
+    </div>
 </template>
 
 <script>
 import CardComp from './CardComp.vue';
+import HeaderComp from './HeaderComp.vue';
+import LoaderComp from './LoaderComp.vue';
 
 
 export default {
     name: "MainComp",
     components: {
-        CardComp
-    },
+    CardComp,
+    HeaderComp,
+    LoaderComp
+},
     props: {
-        SpotifyAlbum: Array
+        SpotifyAlbum: Array,
+        isLoaded: Boolean
     }
 }
 </script>

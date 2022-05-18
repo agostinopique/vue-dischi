@@ -1,25 +1,26 @@
 <template>
   <div>
-    <HeaderComp />
-    <MainComp :SpotifyAlbum="discArr"/>
+    <MainComp 
+      :SpotifyAlbum="discArr"
+      :isLoaded="isLoaded"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import MainComp from './components/MainComp.vue'
-import HeaderComp from './components/HeaderComp.vue'
 
 export default {
   name: 'App',
   components: { 
-    MainComp, 
-    HeaderComp 
+    MainComp
   },
   data(){
     return{
       apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
-      discArr: []
+      discArr: [],
+      isLoaded: false
     }
   },
   mounted(){
@@ -30,7 +31,7 @@ export default {
       axios.get(this.apiUrl)
         .then((res)=> {
           this.discArr = res.data.response;
-          console.log(res.data.response);
+          this.isLoaded = true;
       })
     }
   }
