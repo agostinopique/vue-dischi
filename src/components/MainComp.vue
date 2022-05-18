@@ -1,14 +1,17 @@
 <template>
     <div>
-        <HeaderComp />
+        <HeaderComp 
+            @genreChange="searchGenre" 
+        />
         <main>
             <div v-if="this.isLoaded" class="disc-container">
                 <CardComp
-                    v-for="(album, index) in discArr"
+                    v-for="(album, index) in searchGenre"
                     :key="`album-${index}`"
                     :AlbumCard="album"
                 />
             </div>
+
             <div v-else>
                 <LoaderComp />
             </div>
@@ -35,7 +38,8 @@ export default {
         return{
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
             discArr: [],
-            isLoaded: false
+            isLoaded: false,
+            searchParam: ''
         }
     },
 
@@ -49,9 +53,22 @@ export default {
             .then((res)=> {
             this.discArr = res.data.response;
             this.isLoaded = true;
-        })
+            })
+        },
+       /*  searchGenre(string){
+            this.searchParam = string;
+            
+        } */
+    },
+
+/*
+    computed: {
+        searchGenre(){
+           
+
+           return this.discArr;
         }
-    }
+    }*/
 
 }
 </script>

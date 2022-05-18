@@ -9,7 +9,11 @@
             </div>
 
             <div class="genre-select">
-                <select name="genre" id="genre">
+                <select
+                    v-model="value"
+                    @change="$emit('genreChange', value)"
+                    name="genre" id="genre">
+
                     <option value="default" selected>Choose a Genre</option>
                     <option value="rock">Rock</option>
                     <option value="pop">Pop</option>
@@ -25,7 +29,13 @@
 <script>
 
 export default {
-    name: 'HeaderComp'
+    name: 'HeaderComp',
+
+    data(){
+        return {
+            value: 'default'
+        }
+    }
 }
 </script>
 
