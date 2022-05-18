@@ -10,6 +10,8 @@
 
             <SelectComp 
                 @genreChange="searchGenre"
+                @authorChange="searchAuthor"
+                :AlbumArr="AlbumArr"
             />
         </div>
     </div>
@@ -23,10 +25,15 @@ export default {
     components: {
         SelectComp
     },
+    props: {
+
+        AlbumArr: Array
+    },
 
     data(){
         return{
-            searchParam: ''
+            searchParam: '',
+            searchByAuthor: ''
         }
     },
 
@@ -34,7 +41,10 @@ export default {
         searchGenre(genere){
             this.searchParam = genere;
             this.$emit('getGenre', genere);
-            console.log('GENERE',this.searchParam);
+        },
+        searchAuthor(author){
+            this.searchByAuthor = author;
+            this.$emit('getAuthor', author);
         }
     }
     

@@ -25,7 +25,7 @@ export default {
 
 .card-container{
     width: calc((100% - 100px) / 5);
-    min-width: 180px; 
+    min-width: 200px; 
     min-height: 300px;
     margin: 10px;
     padding: 15px;

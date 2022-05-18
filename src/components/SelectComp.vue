@@ -1,18 +1,36 @@
 <template>
-    <div class="genre-select">
-
-        <select
-            v-model="value"
-            @change="$emit('genreChange', value)"
-            name="genre" id="genre">
-            
-            <option value="default" selected>Choose a Genre</option>
-            <option value="rock">Rock</option>
-            <option value="pop">Pop</option>
-            <option value="jazz">Jazz</option>
-            <option value="metal">Metal</option>
-        </select>
+    <div class="select-container">
+        
+        <div class="genre-select">
     
+            <select
+                v-model="valueGenre"
+                @change="$emit('genreChange', valueGenre)"
+                name="genre" id="genre">
+                
+                <option value="default" selected>Choose a Genre</option>
+                <option 
+                    v-for="(genre, index) in genreFilter"
+                    :key="`album-${index}`"
+                    :value="genre">{{genre}}</option>
+            </select>
+    
+        </div>
+        <div class="genre-select">
+    
+            <select
+                v-model="valueAuthor"
+                @change="$emit('authorChange', valueAuthor)"
+                name="genre" id="author">
+                
+                <option value="default" selected>Choose an Author</option>
+                <option 
+                    v-for="(author, index) in authorFilter"
+                    :key="`album-${index}`"
+                    :value="author">{{author}}</option>
+            </select>
+    
+        </div>
     </div>
 </template>
 
@@ -20,19 +38,57 @@
 export default {
     name: 'SelectComp',
 
+    props: {
+        AlbumArr: Array
+    },
+
     data(){
         return {
-            value: 'default'
+            valueGenre: 'default',
+            valueAuthor: 'default'
         }
+    },
+
+    computed: {
+        genreFilter(){
+            let genreArr = [];
+
+            this.AlbumArr.forEach(album => {
+                if(!genreArr.includes(album.genre)){
+                    genreArr.push(album.genre);
+                }
+            })
+            return genreArr;
+        },
+
+        authorFilter(){
+            let authorArr = [];
+
+            this.AlbumArr.forEach(album => {
+                if(!authorArr.includes(album.author)){
+                    authorArr.push(album.author);
+                }
+            });
+            return authorArr
+        }
+
     }
 }
 </script>
 
 <style lang="scss" scoped>
-#genre{
-        padding: 10px 25px;
-        option{
-            background-color: white;
-        }
+.select-container{
+    display: flex;
+}
+#genre,
+#author{
+    padding: 10px 25px;
+    option{
+        background-color: white;
     }
+}
+
+#author{
+    margin-left: 5px;
+}
 </style>

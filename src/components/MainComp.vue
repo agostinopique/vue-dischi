@@ -2,6 +2,8 @@
     <div>
         <HeaderComp 
             @getGenre="receiveGenre"
+            @getAuthor="receiveAuthor"
+            :AlbumArr="discArr"
         />
         <main>
             <div v-if="this.isLoaded" class="disc-container">
@@ -39,7 +41,8 @@ export default {
             apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
             discArr: [],
             isLoaded: false,
-            genreParam: ''
+            genreParam: '',
+            authorParam: ''
         }
     },
 
@@ -57,7 +60,9 @@ export default {
         },
         receiveGenre(genere){
             this.genreParam = genere;
-            console.log('GENRE', genere);
+        },
+        receiveAuthor(author){
+            this.authorParam = author;
         }
     },
 
@@ -66,7 +71,20 @@ export default {
         albumFilter(){
             let filteredAlbums = [];
 
-            this.discArr.forEach((album) => {
+            // ALTERNATIVA CON FILTER
+            if(this.genreParam === 'default'){
+
+                filteredAlbums = this.discArr;
+
+            } else {
+
+                filteredAlbums = this.discArr.filter(album => {
+                    return album.genre.toUpperCase().includes(this.genreParam.toUpperCase());
+                })
+
+            }
+
+            /* this.discArr.forEach((album) => {
 
                 if(album.genre.toUpperCase().includes(this.genreParam.toUpperCase())){
                     
@@ -77,7 +95,7 @@ export default {
                     filteredAlbums = this.discArr;
 
                 }
-            })
+            }) */
             
             return filteredAlbums;
 
