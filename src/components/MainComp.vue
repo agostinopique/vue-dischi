@@ -2,9 +2,9 @@
     <div>
         <HeaderComp />
         <main>
-            <div v-if="isLoaded" class="disc-container">
+            <div v-if="this.isLoaded" class="disc-container">
                 <CardComp
-                    v-for="(album, index) in SpotifyAlbum"
+                    v-for="(album, index) in discArr"
                     :key="`album-${index}`"
                     :AlbumCard="album"
                 />
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import CardComp from './CardComp.vue';
 import HeaderComp from './HeaderComp.vue';
 import LoaderComp from './LoaderComp.vue';
@@ -28,11 +29,30 @@ export default {
     CardComp,
     HeaderComp,
     LoaderComp
-},
-    props: {
-        SpotifyAlbum: Array,
-        isLoaded: Boolean
+    },
+
+    data(){
+        return{
+            apiUrl: 'https://flynn.boolean.careers/exercises/api/array/music',
+            discArr: [],
+            isLoaded: false
+        }
+    },
+
+    mounted(){
+        this.getAPI()
+    },
+
+    methods: {
+        getAPI(){
+        axios.get(this.apiUrl)
+            .then((res)=> {
+            this.discArr = res.data.response;
+            this.isLoaded = true;
+        })
+        }
     }
+
 }
 </script>
 

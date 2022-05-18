@@ -10,7 +10,7 @@
 
             <div class="genre-select">
                 <select name="genre" id="genre">
-                    <option selected>Choose a Genre</option>
+                    <option value="default" selected>Choose a Genre</option>
                     <option value="rock">Rock</option>
                     <option value="pop">Pop</option>
                     <option value="jazz">Jazz</option>
