@@ -1,0 +1,9 @@
+@mixin dFlex(){
+    display:flex;
+}
+
+@mixin dCenter(){
+    @include dFlex;
+    align-items: center;
+    justify-content: center; 
+}

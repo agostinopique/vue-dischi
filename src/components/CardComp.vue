@@ -22,6 +22,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/vars';
+@import '../assets/style/mixins';
+
 
 .card-container{
     width: calc((100% - 100px) / 5);
@@ -32,7 +34,7 @@ export default {
     background-color: $secondary-color;
     text-align: center;
     .disc-text{
-        display: flex;
+        @include dFlex;
         flex-direction: column;
         padding-top: 10px;
         h4{

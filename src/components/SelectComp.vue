@@ -10,8 +10,8 @@
                 
                 <option value="default" selected>Choose a Genre</option>
                 <option 
-                    v-for="(genre, index) in genreFilter"
-                    :key="`album-${index}`"
+                    v-for="(genre, index) in GenreArr"
+                    :key="`genre-${index}`"
                     :value="genre">{{genre}}</option>
             </select>
     
@@ -25,7 +25,7 @@
                 
                 <option value="default" selected>Choose an Author</option>
                 <option 
-                    v-for="(author, index) in authorFilter"
+                    v-for="(author, index) in AuthorArr"
                     :key="`album-${index}`"
                     :value="author">{{author}}</option>
             </select>
@@ -39,7 +39,8 @@ export default {
     name: 'SelectComp',
 
     props: {
-        AlbumArr: Array
+        GenreArr: Array,
+        AuthorArr: Array
     },
 
     data(){
@@ -47,38 +48,14 @@ export default {
             valueGenre: 'default',
             valueAuthor: 'default'
         }
-    },
-
-    computed: {
-        genreFilter(){
-            let genreArr = [];
-
-            this.AlbumArr.forEach(album => {
-                if(!genreArr.includes(album.genre)){
-                    genreArr.push(album.genre);
-                }
-            })
-            return genreArr;
-        },
-
-        authorFilter(){
-            let authorArr = [];
-
-            this.AlbumArr.forEach(album => {
-                if(!authorArr.includes(album.author)){
-                    authorArr.push(album.author);
-                }
-            });
-            return authorArr
-        }
-
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/style/mixins';
 .select-container{
-    display: flex;
+    @include dFlex;
 }
 #genre,
 #author{

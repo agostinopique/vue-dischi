@@ -25,6 +25,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/style/mixins';
+
 #loader {
     position:fixed;
     top: 0;
@@ -33,9 +35,7 @@ export default {
     bottom: 0;
     background-color: #151924;
     z-index: 6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include dCenter;
 }
 
 #loader span {

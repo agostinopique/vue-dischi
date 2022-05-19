@@ -11,7 +11,8 @@
             <SelectComp 
                 @genreChange="searchGenre"
                 @authorChange="searchAuthor"
-                :AlbumArr="AlbumArr"
+                :GenreArr="GenreArr"
+                :AuthorArr="AuthorArr"
             />
         </div>
     </div>
@@ -27,7 +28,8 @@ export default {
     },
     props: {
 
-        AlbumArr: Array
+        GenreArr: Array,
+        AuthorArr: Array
     },
 
     data(){
@@ -53,13 +55,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/vars';
+@import '../assets/style/mixins';
 
 .header {
     height: 100px;
     padding: 0 25px;
     background-color: $secondary-color;
     .header-container{
-        display: flex;
+        @include dFlex;
         height: 100%;
         width: 75%;
         margin: 0 auto;
